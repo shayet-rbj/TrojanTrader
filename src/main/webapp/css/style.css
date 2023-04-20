@@ -1,0 +1,523 @@
+body {
+	font-family: "Montserrat", Arial, sans-serif;
+	background: #fff;
+	font-size: 15px;
+	line-height: 1.8;
+	font-weight: 400;
+	color: gray;
+	
+}
+
+a {
+	color: #00bd56;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+a:hover,
+a:focus {
+	color: #00bd56;
+	text-decoration: none;
+	outline: none !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+	line-height: 1.5;
+	color: rgba(0, 0, 0, 0.8);
+	font_weight: 400;
+}
+
+.wrap {
+	position: relative;
+	z-index: 0;
+	width: 100%;
+	background: #00bd56;
+	background: #207dff;
+	background: -moz-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	background: -webkit-gradient(left bottom, right top, color-stop(0%, #207dff), color-stop(100%, #00bd55));
+	background: -webkit-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	background: -o-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	background: -ms-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	background: linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#207dff', endColorstr='#00bd55', GradientType=1);
+}
+
+.wrap .phone {
+	z-index: 1;
+}
+
+.wrap .phone i {
+	color: #fff;
+}
+
+.wrap .phone a {
+	color: #fff;
+	font-size: 12px;
+}
+
+
+.social-media {
+	display: inline-block;
+}
+
+.social-media p a {
+	width: 40px;
+	height: 40px;
+	margin-right: 1px;
+}
+
+.social-media p a span {
+	color: #fff;
+}
+
+.social-media p a:hover {
+	background: #00bd56;
+	border-color: #00bd56;
+}
+
+.social-media p a:hover span {
+	color: #fff;
+}
+
+
+/* =====login page setting====== */
+
+
+
+/* ================[菜单]样式设置================= */
+
+/* 菜单:背景色设置 */
+
+.ca-navbar-light {
+	background: #fff !important;
+	z-index: 3;
+	padding: 0;
+	-webkit-box-shadow: 0px 5px 20px -17px rgba(0, 0, 0, 0.34);
+	-moz-box-shadow: 0px 5px 20px -17px rgba(0, 0, 0, 0.34);
+	box-shadow: 0px 5px 20px -17px rgba(0, 0, 0, 0.34);
+}
+
+/* 菜单:中等屏幕尺寸时,调整内边距 */
+@media (max-width: 991.98px) {
+	.ca-navbar-light {
+		background: #fff;
+		position: relative;
+		top: 0;
+		padding: 10px 15px;
+	}
+}
+
+/* 菜单:品牌名称字号设置 */
+.ca-navbar-light .navbar-brand {
+	color: #000000;
+	font-weight: 800;
+	font-size: 28px;
+	line-height: 1;
+}
+
+.ca-navbar-light .navbar-brand span {
+	color: #00bd56;
+}
+
+.ca-navbar-light .navbar-brand:hover,
+.ca-navbar-light .navbar-brand:focus {
+	color: #000000;
+}
+
+/* 菜单:不同屏幕尺寸时，相对位置 */
+@media (max-width: 767.98px) {
+	.ca-navbar-light .navbar-brand {
+		margin: 10px 0;
+	}
+}
+
+@media (max-width: 991.98px) {
+	.ca-navbar-light .navbar-nav {
+		padding-bottom: 10px;
+	}
+}
+
+/* 菜单:调整链接文字样式 */
+.ca-navbar-light .navbar-nav>.nav-item>.nav-link {
+	font-size: 14px;
+	padding-top: 2.3rem;
+	padding-bottom: 2.3rem;
+	padding-left: 18px;
+	padding-right: 18px;
+	font-weight: 700;
+	color: #000000;
+	position: relative;
+	opacity: 1 !important;
+}
+
+.ca-navbar-light .navbar-nav>.nav-item>.nav-link:hover {
+	color: #00bd56;
+}
+
+
+/* 菜单:菜单项被选中(激活)状态的样式 */
+.ca-navbar-light .navbar-nav>.nav-item.active>a {
+	color: #00bd56;
+}
+
+
+.ca-navbar-light .navbar-nav>.nav-item.active>a:before {
+	visibility: visible;
+	background-color: #00bd56;
+}
+
+@media (max-width: 991.98px) {
+	.ca-navbar-light .navbar-nav>.nav-item.active>a {
+		color: #000000;
+	}
+
+	.ca-navbar-light .navbar-nav>.nav-item.active>a:before {
+		display: none;
+	}
+}
+
+/* ================[面包屑]样式设置================= */
+
+
+/* 面包屑:设定板块的高度 */
+.breadcrumbs-wrap {
+	height: 400px;
+}
+
+
+/* 面包屑：背景图 */
+.breadcrumbs-wrap {
+	width: 100%;
+	height: 100%;
+	position: inherit;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+	position: relative;
+}
+
+
+@media (max-width: 1199.98px) {
+	.breadcrumbs-wrap {
+		background-position: center center !important;
+	}
+}
+
+/* 面包屑:为图片添加一层蒙版,全面覆盖父元素 */
+.breadcrumbs-wrap .overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: '';
+	opacity: .1;
+	background: #000000;
+}
+
+
+
+
+/* 面包屑:设定蒙版为半透明，背景色，为了让颜色更统一 */
+/* .breadcrumbs-wrap.breadcrumbs-wrap-2 .overlay { */
+.breadcrumbs-wrap .overlay {
+	opacity: .5;
+	background: #207dff;
+	background: -moz-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	background: -webkit-gradient(left bottom, right top, color-stop(0%, #207dff), color-stop(100%, #00bd55));
+	background: -webkit-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	background: -o-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	background: -ms-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	background: linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#207dff', endColorstr='#00bd55', GradientType=1);
+}
+
+
+/* 面包屑:设定文字内容显示的(高度)范围 */
+.breadcrumbs-wrap  .slider-text {
+	height: 400px;
+}
+
+.breadcrumbs-wrap  .slider-text h1 {
+	font-weight: 400;
+	font-size: 40px;
+}
+
+.breadcrumbs-wrap .slider-text h1 {
+	color: #fff;
+	line-height: 1.2;
+	font-family: "Montserrat", Arial, sans-serif;
+	font-size: 60px;
+	font-weight: 800;
+}
+
+@media (max-width: 991.98px) {
+	.breadcrumbs-wrap .slider-text h1 {
+		font-size: 40px;
+	}
+}
+
+.breadcrumbs-wrap .slider-text h1 span {
+	color: #00bd56;
+}
+
+.breadcrumbs-wrap .slider-text .subheading {
+	font-size: 15px;
+	color: #00bd56;
+	text-transform: uppercase;
+	font-family: "Montserrat", Arial, sans-serif;
+	font-weight: 700;
+	letter-spacing: 2px;
+}
+
+.breadcrumbs-wrap .slider-text p {
+	font-size: 18px;
+	line-height: 1.5;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumbs-wrap .slider-text p strong {
+	font-weight: 700;
+}
+
+.breadcrumbs-wrap .slider-text p strong a {
+	color: #000000;
+}
+
+.breadcrumbs-wrap .slider-text .breadcrumbs {
+	font-size: 16px;
+	font-weight: 400;
+	margin-bottom: 20px;
+	z-index: 99;
+}
+
+.breadcrumbs-wrap .slider-text .breadcrumbs span {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.breadcrumbs-wrap .slider-text .breadcrumbs span i {
+	color: rgba(255, 255, 255, 0.3);
+}
+
+.breadcrumbs-wrap .slider-text .breadcrumbs span a {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumbs-wrap .slider-text .breadcrumbs span a:hover,
+.breadcrumbs-wrap .slider-text .breadcrumbs span a:focus {
+	color: #00bd56;
+}
+
+.breadcrumbs-wrap .slider-text .breadcrumbs span a:hover i,
+.breadcrumbs-wrap .slider-text .breadcrumbs span a:focus i {
+	color: #00bd56;
+}
+
+/* ================[页尾]样式设置================= */
+
+/* 页尾:设定背景色 */
+.footer {
+	background: #1a1a1a;
+	position: relative;
+	z-index: 0;
+	overflow: hidden;
+	padding: 7em 0;
+	margin-top: 300px;
+}
+
+.footer a {
+	color: #00bd56;
+}
+
+.footer p {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.footer .copyright {
+	color: rgba(255, 255, 255, 0.3);
+	color: #999999;
+} 
+
+/* 页尾:设定标题样式 */
+.footer .footer-heading {
+	font-size: 22px;
+	margin-bottom: 30px;
+	font-weight: 700;
+	color: #fff;
+	position: relative;
+}
+/* 页尾:再标题后面添加一个绿色的装饰线 */
+.footer .footer-heading:after {
+	position: absolute;
+	bottom: -4px;
+	left: 0;
+	content: '';
+	width: 40px;
+	height: 4px;
+	background: #00bd56;
+}
+
+.footer ul.list-unstyled li a {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.footer .block-21 .img {
+	display: block;
+	height: 80px;
+	width: 80px;
+}
+
+.footer .block-21 .text {
+	width: calc(100% - 100px);
+}
+
+.footer .block-21 .text .heading {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.4;
+}
+
+.footer .block-21 .text .heading a {
+	color: #fff;
+}
+
+.footer .block-21 .text .heading a:hover,
+.footer .block-21 .text .heading a:active,
+.footer .block-21 .text .heading a:focus {
+	text-decoration: none;
+}
+
+.footer .block-21 .text .meta>div {
+	display: inline-block;
+	font-size: 12px;
+	margin-right: 5px;
+}
+
+.footer .block-21 .text .meta>div a {
+	color: gray;
+}
+
+.footer .block-23 ul li {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.footer .block-23 ul li a {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.footer .block-23 ul li .icon {
+	color: rgba(255, 255, 255, 0.4);
+}
+
+.footer .ca-footer-social li a {
+	background: rgba(255, 255, 255, 0.1);
+	color: #00bd56;
+}
+
+/* 页尾:设定社交图标的样式 */
+.ca-footer-social li {
+	list-style: none;
+	margin: 0 10px 0 0;
+	display: inline-block;
+}
+
+.ca-footer-social li a {
+	height: 40px;
+	width: 40px;
+	display: block;
+	float: left;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 50%;
+	position: relative;
+}
+
+.ca-footer-social li a span {
+	position: absolute;
+	font-size: 20px;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.ca-footer-social li a:hover {
+	color: #fff;
+}
+
+/* 图片，博客图片，用户图片，缩放居中显示 */
+.img,
+.blog-img,
+.user-img {
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+
+
+.block-23 ul {
+	padding: 0;
+}
+
+.block-23 ul li,
+.block-23 ul li>a {
+	display: table;
+	line-height: 1.5;
+	margin-bottom: 15px;
+}
+
+.block-23 ul li span {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.block-23 ul li .icon,
+.block-23 ul li .text {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.block-23 ul li .icon {
+	width: 40px;
+	font-size: 18px;
+	padding-top: 2px;
+	color: white;
+}
+
+.footer .copyright a {
+	font-size: 1rem;
+}
+
+
+section{
+	height: 400px;
+}
+
+.tradeCon {
+	display:flex;
+	flex-wrap:wrap;
+	justify-content: space-around;
+}
+
+.tradeCon2 {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	
+}
+
+.card-img-top {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<script>
+		function isLoggedIn(){
+			let c = getcookie("login");
+			if(c == "" || c==false || c=="false"){
+				//user isn't logged in
+				document.getElementById("login").hidden = false;
+				document.getElementById("createAccount").hidden = false;
+				document.getElementById("logout").hidden = true;
+			}
+			else{
+				//user is logged in 
+				document.getElementById("login").hidden = true;
+				document.getElementById("createAccount").hidden = true;
+				document.getElementById("logout").hidden = false;
+			}
+			
+		}
+		function logout(){
+			document.cookie = "login=false";
+			document.cookie = "username=null";
+			document.cookie = "username=null";
+			window.location.replace("Index.html");
+		}
+		function getcookie(name = '') {
+		    let cookies = document.cookie;
+		    let cookiestore = {};
+		    
+		    cookies = cookies.split(";");
+		    
+		    if (cookies[0] == "" && cookies[0][0] == undefined) {
+		        return undefined;
+		    }
+		    
+		    cookies.forEach(function(cookie) {
+		        cookie = cookie.split(/=(.+)/);
+		        if (cookie[0].substr(0, 1) == ' ') {
+		            cookie[0] = cookie[0].substr(1);
+		        }
+		        cookiestore[cookie[0]] = cookie[1];
+		    });
+		    
+		    return (name !== '' ? cookiestore[name] : cookiestore);
+		}
+		function getStockPrice(stock){
+			var xhttp = new XMLHttpRequest();
+	        xhttp.open("POST", "StockPriceServlet", true);
+	        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	        xhttp.onload = function() {
+	        	document.getElementById(stock).innerHTML = this.responseText;
+	        }
+	        xhttp.send("field=stockInfo&stockName=" + stock);
+			console.log(stock);
+		}
+		
+	</script>
+	
+	<head>
+		<meta charset="utf-8">
+		<title>index</title>
+		<meta name="viewport" content="wid=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+		<script src="https://kit.fontawesome.com/2ceae6c153.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body onload="isLoggedIn(); getStockPrice('stock1'); getStockPrice('stock2'); getStockPrice('stock3');">
+		<header class="mui-bar mui-bar-nav">
+			
+
+			<!-- Menu -->
+			<nav class="ca-navbar-light navbar navbar-expand-lg navbar-light bg-light"
+				aria-label="Fifth navbar example">
+				<div class="container">
+					<a class="navbar-brand" href="#">
+						<i class="fa-solid fa-arrow-trend-up"></i>
+						Trojan Stock</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarsExample05">
+						<!-- boostrap 5 left margin's short is ms,right margin's short is me -->
+						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							<li class="nav-item" id="login">
+								<a class="nav-link" aria-current="page" href="Login.html">Login</a>
+							</li>
+							
+							<li class="nav-item" id = "logout">
+								<a class="nav-link" aria-current="page" href="" onclick="logout();" >Logout</a>
+							</li>
+							
+							<li class="nav-item" id="createAccount">
+								<a class="nav-link" aria-current="page" href="Create_Account.html">Create Account</a>
+							</li>
+		
+							<li class="nav-item">
+								<a class="nav-link" href="User_Page_Education.html">Trojan Stock Education</a>
+							</li>
+							
+							<li class="nav-item">
+								<a class="nav-link" href="User_Page_PurchaseStock.html">Buy/Sell Stock</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+
+
+			<!-- My Stock Section -->
+			<section class="my_stock">
+				<div class="container">
+					<ul>
+						<li><span class="text" id = "stock1">Facebook Price: </span></li>
+						
+						<li><span class="text" id = "stock2">Amazon Price: </span></li>
+									
+						<li></span><span class="text" id = "stock3">Google Price:</span></li>
+					</ul>
+				</div>
+				
+			</section>
+			<!-- footer -->
+
+			<footer class="footer">
+				<div class="container">
+					<div class="row">
+						
+						<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+							<h2 class="footer-heading">Contact Us</h2>
+							<div class="block-23 mb-3">
+								<ul>
+									<li><span class="icon fa fa-map"></span><span class="text">Los Angeles, CA 90007</span></li>
+									
+									<li><i class="icon fa-solid fa-chalkboard-user"></i><span class="text">Mentor: Devanshu Gupta</span></li>
+												
+									<li><i class="icon fa-solid fa-user-group"></i><span class="text"> Group Number: 22 </span></li>
+									<li><span class="icon fa fa-paper-plane"></span><span class="text">jwang977@usc.edu etc.  </span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="row mt-5">
+						<div class="col-md-12 text-center">
+
+							<p class="copyright">
+								Copyright &copy;<script>
+									document.write(new Date().getFullYear());
+								</script> <i class="fa fa-heart" aria-hidden="true"></i> <a
+									href="http://www.itsishu.cn" target="_blank">CSCI201</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+		</header>
+	</body>
+</html>
