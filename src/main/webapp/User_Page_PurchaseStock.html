@@ -24,19 +24,6 @@
         xhttp.send("field=stockInfo&stockName=" + stock + "&quantity=" + document.myform.quantity.value + "&price=" + 100 + "&username=" + c);
 		console.log(stock);
 	}
-	function sellStock(stock){
-		var xhttp = new XMLHttpRequest();
-    	xhttp.open("POST", "SellServlet", true);
-    	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    	xhttp.onload = function() {
-    		document.getElementById("buySellMsg").innerHTML = this.responseText;
-    	}
-    	let c = getcookie("username");
-    	
-        xhttp.send("field=stockInfo&stockName=" + stock + "&quantity=" + document.myform.quantity.value + "&price=" + 100 + "&username=" + c);
-		console.log(stock);
-	}
-	
 	function getcookie(name = '') {
 	    let cookies = document.cookie;
 	    let cookiestore = {};
@@ -80,14 +67,21 @@
 					<div class="collapse navbar-collapse" id="navbarsExample05">
 						<!-- boostrap 5 left margin's short is ms,right margin's short is me -->
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							<li class="nav-item" id="login">
+								<a class="nav-link" aria-current="page" href="Index.html">Home</a>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link" aria-current="page" href="User_Page_MyStock.html">My Stocks</a>
 							</li>
 							<li class="nav-item active">
-								<a class="nav-link" href="User_Page_PurchaseStock.html">Purchase Stock</a>
+								<a class="nav-link" href="User_Page_PurchaseStock.html">Buy/Sell Stock</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="User_Page_Education_After_Login.html">Trojan Stock Education</a>
+								<a class="nav-link" href="User_Page_Education.html">Trojan Stock Education</a>
+							</li>
+							
+							<li class="nav-item">
+								<a class="nav-link" aria-current="page" href="#">Logout</a>
 							</li>
 						</ul>
 
@@ -115,7 +109,7 @@
 							<div class="input-group mb-3">
 								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy" name="quantity">
 							  	<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('AAPL');">Buy</button>
-								<button class="btn btn-danger" type="button" id="button-addon1" onclick="sellStock('AAPL');">Sell</button>
+								<button class="btn btn-danger" type="button" id="button-addon1">Sell</button>
 							  </div>
 							  </form>
 						</div>
@@ -136,7 +130,8 @@
 						<div class="card-body">
 							<div class="input-group mb-3">
 								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy">
-								<button class="btn btn-primary" type="button" id="button-addon1">Buy</button>
+								<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('');">Buy</button>
+								<button class="btn btn-danger" type="button" id="button-addon1">Sell</button>
 							  </div>
 						</div>
 					  </div>
@@ -156,7 +151,8 @@
 						<div class="card-body">
 							<div class="input-group mb-3">
 								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy">
-								<button class="btn btn-primary" type="button" id="button-addon1">Buy</button>
+								<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('');">Buy</button>
+								<button class="btn btn-danger" type="button" id="button-addon1">Sell</button>
 							  </div>
 						</div>
 					  </div>
@@ -176,7 +172,8 @@
 						<div class="card-body">
 							<div class="input-group mb-3">
 								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy">
-								<button class="btn btn-primary" type="button" id="button-addon1" onclick="AAPLPrice();">Buy</button>
+								<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('');">Buy</button>
+								<button class="btn btn-danger" type="button" id="button-addon1">Sell</button>
 							  </div>
 						</div>
 					  </div>
