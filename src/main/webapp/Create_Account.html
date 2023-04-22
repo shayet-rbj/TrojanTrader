@@ -103,6 +103,26 @@
 			.bd-mode-toggle {
 			z-index: 1500;
 			}
+			#floatingInput {
+			border-radius: 25px;
+			margin-bottom: 10px;
+			}
+	
+			#floatingPassword {
+				border-radius: 25px;
+				margin-bottom: 20px;
+			}
+	
+			#accountButton {
+				background-color: orange;
+				border: orange;
+				border-radius: 25px;
+			}
+	
+			h1 {
+				text-align: center;
+				margin-bottom: 10px;
+			}
 		</style>
 		
 		<link href="css/sign-in.css" rel="stylesheet">
@@ -113,16 +133,18 @@
 		<main class="form-signin w-100 m-auto">
 		  <form name = "myform">
 		    <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-		    <h1 class="h3 mb-3 fw-normal">Please create account</h1>
-		
-		    <div class="form-floating">
-		      <input type="email" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
-		      <label for="floatingInput">Email address</label>
-		    </div>
-		    <div class="form-floating">
-		      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-		      <label for="floatingPassword">Password</label>
-		    </div>
+		    <h1 class="h3 mb-3 fw-normal">Create an Account to Enjoy Trading!</h1>
+
+			<div class="form-floating">
+				<input type="email" name="username" class="form-control" id="floatingInput"
+					placeholder="name@example.com">
+				<label for="floatingInput">Email address</label>
+			</div>
+			<div class="form-floating">
+				<input type="password" name="password" class="form-control" id="floatingPassword"
+					placeholder="Password">
+				<label for="floatingPassword">Password</label>
+			</div>
 		
 		  <!--  <div class="checkbox mb-3">
 		      <label>
@@ -130,8 +152,8 @@
 		      </label>
 		    </div> -->
 		    <!-- <button class="w-100 btn btn-lg btn-primary" type="submit">Create Account</button> -->
-		    <input type="button" class="w-100 btn btn-lg btn-primary" value="Create Account" onclick="createAccount();" />
-		    <strong><div id="loginMsg"></div></strong><br />
+		    <input type="button" id="accountButton" class="w-100 btn btn-lg btn-primary" value="Create Account" onclick="createAccount();" />
+		    <strong><div id="loginMsg"></div></strong><br/>
 		    <p class="mt-5 mb-3 text-body-secondary">© Trojan Trade 2023</p>
 		  </form>
 		</main>
