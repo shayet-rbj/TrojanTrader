@@ -1,5 +1,84 @@
 <!DOCTYPE html>
 <html>
+	<script>
+	function getcookie(name = '') {
+	    let cookies = document.cookie;
+	    let cookiestore = {};
+	    
+	    cookies = cookies.split(";");
+	    
+	    if (cookies[0] == "" && cookies[0][0] == undefined) {
+	        return undefined;
+	    }
+	    
+	    cookies.forEach(function(cookie) {
+	        cookie = cookie.split(/=(.+)/);
+	        if (cookie[0].substr(0, 1) == ' ') {
+	            cookie[0] = cookie[0].substr(1);
+	        }
+	        cookiestore[cookie[0]] = cookie[1];
+	    });
+	    
+	    return (name !== '' ? cookiestore[name] : cookiestore);
+		}
+		function isLoggedIn(){
+			let c = getcookie("login");
+			if(c == "" || c==false || c=="false"){
+				window.location.replace("Index.html");
+			}
+		}
+		function getUsername(){
+			let c = getcookie("username");
+			document.getElementById("username").innerHTML = c;
+		}
+		
+		function getBalance(){
+			let c = getcookie("username");
+			
+			var xhttp = new XMLHttpRequest();
+	    	xhttp.open("POST", "BalanceServlet", true);
+	    	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    	xhttp.onload = function() {
+	    		document.getElementById("balance").innerHTML = this.responseText;
+	    	}
+	    	
+	        xhttp.send("field=stockInfo&username=" + c);
+		}
+		function getNumTrades(){
+			let c = getcookie("username");
+			
+			var xhttp = new XMLHttpRequest();
+	    	xhttp.open("POST", "NumTradesServlet", true);
+	    	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    	xhttp.onload = function() {
+	    		document.getElementById("numTrades").innerHTML = this.responseText;
+	    	}
+	    	
+	        xhttp.send("field=stockInfo&username=" + c);
+		}
+		
+		function getStockPrice(stock, containername, type){
+			let c = getcookie("username");
+			var xhttp = new XMLHttpRequest();
+	    	xhttp.open("POST", "StockPriceServlet", true);
+	    	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    	xhttp.onload = function() {
+	    		document.getElementById(containername).innerHTML = this.responseText;
+	    	}
+	        xhttp.send("field=stockInfo&stockName=" + stock + "&type=" + type + "&username=" + c);
+		}
+		function getLastTen(){
+			let c = getcookie("username");
+			var xhttp = new XMLHttpRequest();
+	    	xhttp.open("POST", "LastTenServlet", true);
+	    	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    	xhttp.onload = function() {
+	    		document.getElementById("printTable").innerHTML = this.responseText;
+	    	}
+	        xhttp.send("field=stockInfo&username=" + c);
+		}
+		
+	</script>
 	<head>
 		<meta charset="utf-8">
 		<title>User_Home_Page</title>
@@ -260,7 +339,18 @@
 		</style>
 
 	</head>
-	<body>
+	<body onload="isLoggedIn(); getUsername(); getBalance(); getNumTrades(); getLastTen(); 
+		getStockPrice('AAPL', 'AAPLcontainer', 'current'); getStockPrice('MSFT', 'MSFTcontainer', 'current'); getStockPrice('TSLA', 'TSLAcontainer', 'current'); getStockPrice('AMZN', 'AMZNcontainer', 'current'); 
+		getStockPrice('AAPL', 'AAPLcontainer2', 'average'); getStockPrice('MSFT', 'MSFTcontainer2', 'average'); getStockPrice('TSLA', 'TSLAcontainer2', 'average'); getStockPrice('AMZN', 'AMZNcontainer2', 'average');
+		getStockPrice('AAPL', 'AAPLcontainer3', 'quantity'); getStockPrice('MSFT', 'MSFTcontainer3', 'quantity'); getStockPrice('TSLA', 'TSLAcontainer3', 'quantity'); getStockPrice('AMZN', 'AMZNcontainer3', 'quantity');">
+		<script>
+		function logout(){
+			document.cookie = "login=false";
+			document.cookie = "username=null";
+			window.location.replace("Index.html");
+			return false;
+		}
+		</script>
 		<header class="mui-bar mui-bar-nav">
 
 
@@ -269,7 +359,7 @@
 				<div class="container">
 					<a class="navbar-brand" href="#">
 						<i class="fa-solid fa-arrow-trend-up"></i>
-						Trojan Stock</a>
+						Trojan Trader</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false"
 						aria-label="Toggle navigation">
@@ -279,9 +369,10 @@
 					<div class="collapse navbar-collapse" id="navbarsExample05">
 						<!-- boostrap 5 left margin's short is ms,right margin's short is me -->
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-							<li class="nav-item" id="login">
+							<!--  <li class="nav-item">
 								<a class="nav-link" aria-current="page" href="Index.html">Home</a>
-							</li>
+							</li> -->
+
 							
 							<li class="nav-item active">
 								<a class="nav-link" aria-current="page" href="User_Page_MyStock.html">My Stocks</a>
@@ -290,7 +381,11 @@
 								<a class="nav-link" href="User_Page_PurchaseStock.html">Buy/Sell Stock</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="User_Page_Education.html">Trojan Stock Education</a>
+								<a class="nav-link" href="User_Page_Education.html">Education</a>
+							</li>
+							
+							<li class="nav-item" id = "logout">
+								<a class="nav-link" aria-current="page" href="#" onclick="logout()" >Logout</a>
 							</li>
 							
 							<li class="nav-item" id = "logout">
@@ -317,7 +412,8 @@
 							<div class="row d-flex align-items-center" id="stock_cards">
 								<div class="col col-md-6">
 									<div class="card m-1" style="border-radius: 15px;">
-										<div class="card-body pt-4 px-4 pb-1">
+										<div class="card-body pt-4 px-4 pb-1" style="margin-top: 40px; margin-bottom: 65px;">
+
 											<div class="d-flex text-black">
 												<div class="col-md-4">
 													<div class="container align-content-center">
@@ -327,21 +423,23 @@
 													</div>
 
 												</div>
-												<div class="col-md-8 ms-1">
-													<h5 class="mb-1">APPL</h5>
+												<div class="col-md-8 ms-1" >
+													<h5 class="mb-1">AAPL</h5>
+
 													<p class="mb-2 pb-1" style="color: #2b2a2a;">Apple Inc.</p>
 													<div class="d-flex flex-column rounded-3 p-2 mb-2"
 														style="background-color: #efefef;">
 														<div>
-															<p class="small text-muted mb-1">Current Price: $..</p>
+															<p class="small text-muted mb-1" id="AAPLcontainer">Current Price: $..</p>
 
 														</div>
 														<div>
-															<p class="small text-muted mb-1">24-Hour High: $..</p>
+															<p class="small text-muted mb-1" id="AAPLcontainer2">Avg. Purchase Price: $..</p>
 
 														</div>
 														<div>
-															<p class="small text-muted mb-1">Own: ..</p>
+															<p class="small text-muted mb-1" id="AAPLcontainer3">Owned: ..</p>
+
 
 														</div>
 													</div>
@@ -357,7 +455,8 @@
 									</div>
 
 									<div class="card m-1" style="border-radius: 15px;">
-										<div class="card-body pt-4 px-4 pb-1">
+										<div class="card-body pt-4 px-4 pb-1" style="margin-top: 40px; margin-bottom: 65px;">
+
 											<div class="d-flex text-black">
 												<div class="col-md-4">
 													<div class="container align-content-center">
@@ -373,15 +472,16 @@
 													<div class="d-flex flex-column rounded-3 p-2 mb-2"
 														style="background-color: #efefef;">
 														<div>
-															<p class="small text-muted mb-1">Current Price: $..</p>
+															<p class="small text-muted mb-1" id="TSLAcontainer">Current Price: $..</p>
 
 														</div>
 														<div>
-															<p class="small text-muted mb-1">24-Hour High: $..</p>
+															<p class="small text-muted mb-1" id="TSLAcontainer2">Avg. Purchase Price: $..</p>
 
 														</div>
 														<div>
-															<p class="small text-muted mb-1">Own: ..</p>
+															<p class="small text-muted mb-1" id="TSLAcontainer3">Owned: ..</p>
+
 
 														</div>
 													</div>
@@ -396,48 +496,13 @@
 										</div>
 									</div>
 								
-									<div class="card m-1" style="border-radius: 15px;">
-										<div class="card-body pt-4 px-4 pb-1">
-											<div class="d-flex text-black">
-												<div class="col-md-4">
-													<div class="container align-content-center">
-														<i class="fa-solid fa-arrow-trend-up"></i>
-													</div>
 
-												</div>
-												<div class="col-md-8 ms-1">
-													<h5 class="mb-1">XXXX</h5>
-													<p class="mb-2 pb-1" style="color: #2b2a2a;">XXXX Inc.</p>
-													<div class="d-flex flex-column rounded-3 p-2 mb-2"
-														style="background-color: #efefef;">
-														<div>
-															<p class="small text-muted mb-1">Current Price: $..</p>
-
-														</div>
-														<div>
-															<p class="small text-muted mb-1">24-Hour High: $..</p>
-
-														</div>
-														<div>
-															<p class="small text-muted mb-1">Own: ..</p>
-
-														</div>
-													</div>
-													<!-- <div class="d-flex pt-1">
-														<button type="button"
-															class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
-														<button type="button"
-															class="btn btn-primary flex-grow-1">Follow</button>
-													</div> -->
-												</div>
-											</div>
-										</div>
-									</div>
 																	
 								</div>
 								<div class="col col-md-6">
 									<div class="card m-1" style="border-radius: 15px;">
-										<div class="card-body pt-4 px-4 pb-1">
+										<div class="card-body pt-4 px-4 pb-1" style="margin-top: 40px; margin-bottom: 65px;">
+
 											<div class="d-flex text-black">
 												<div class="col-md-4">
 													<div class="container align-content-center">
@@ -453,15 +518,16 @@
 													<div class="d-flex flex-column rounded-3 p-2 mb-2"
 														style="background-color: #efefef;">
 														<div>
-															<p class="small text-muted mb-1">Current Price: $..</p>
+															<p class="small text-muted mb-1" id="MSFTcontainer">Current Price: $..</p>
 
 														</div>
 														<div>
-															<p class="small text-muted mb-1">24-Hour High: $..</p>
+															<p class="small text-muted mb-1" id="MSFTcontainer2">Avg. Purchase Price: $..</p>
 
 														</div>
 														<div>
-															<p class="small text-muted mb-1">Own: ..</p>
+															<p class="small text-muted mb-1" id="MSFTcontainer3">Owned: ..</p>
+
 
 														</div>
 													</div>
@@ -477,7 +543,8 @@
 									</div>
 
 									<div class="card m-1" style="border-radius: 15px;">
-										<div class="card-body pt-4 px-4 pb-1">
+                  <div class="card-body pt-4 px-4 pb-1" style="margin-top: 40px; margin-bottom: 65px;">
+
 											<div class="d-flex text-black">
 												<div class="col-md-4">
 													<div class="container align-content-center">
@@ -493,15 +560,16 @@
 													<div class="d-flex flex-column rounded-3 p-2 mb-2"
 														style="background-color: #efefef;">
 														<div>
-															<p class="small text-muted mb-1">Current Price: $..</p>
+															<p class="small text-muted mb-1" id="AMZNcontainer">Current Price: $..</p>
 
 														</div>
 														<div>
-															<p class="small text-muted mb-1">24-Hour High: $..</p>
+															<p class="small text-muted mb-1" id="AMZNcontainer2">Avg. Purchase Price: $..</p>
 
 														</div>
 														<div>
-															<p class="small text-muted mb-1">Own: ..</p>
+															<p class="small text-muted mb-1" id="AMZNcontainer3">Owned: ..</p>
+
 
 														</div>
 													</div>
@@ -516,43 +584,6 @@
 										</div>
 									</div>
 								
-									<div class="card m-1" style="border-radius: 15px;">
-										<div class="card-body pt-4 px-4 pb-1">
-											<div class="d-flex text-black">
-												<div class="col-md-4">
-													<div class="container align-content-center">
-														<i class="fa-solid fa-arrow-trend-up"></i>
-													</div>
-
-												</div>
-												<div class="col-md-8 ms-1">
-													<h5 class="mb-1">XXXX</h5>
-													<p class="mb-2 pb-1" style="color: #2b2a2a;">XXX Inc.</p>
-													<div class="d-flex flex-column rounded-3 p-2 mb-2"
-														style="background-color: #efefef;">
-														<div>
-															<p class="small text-muted mb-1">Current Price: $..</p>
-
-														</div>
-														<div>
-															<p class="small text-muted mb-1">24-Hour High: $..</p>
-
-														</div>
-														<div>
-															<p class="small text-muted mb-1">Own: ..</p>
-
-														</div>
-													</div>
-													<!-- <div class="d-flex pt-1">
-														<button type="button"
-															class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
-														<button type="button"
-															class="btn btn-primary flex-grow-1">Follow</button>
-													</div> -->
-												</div>
-											</div>
-										</div>
-									</div>
 									
 								</div>
 							</div>
@@ -577,10 +608,11 @@
 													style="width: 150px; z-index: 1">
 											</div>
 											<div id="head" class="ms-3" style="margin-top: 130px;">
-												<h5 style="font-size: 35px" style="margin-left: 400px;">
-													xxxxx@usc.edu</h5>
+												<h5 style="font-size: 27.5px" style="margin-left: 100px;" id="username">
+												</h5>
 							
-												<p>New User
+												<p>Verified User
+
 													<i class="fa-solid fa-circle-check" style="color: #30dd0e;"></i>
 												</p>
 							
@@ -597,9 +629,9 @@
 														<div class="d-flex align-items-center">
 															<i class="fa-sharp fa-solid fa-location-dot"
 																style="color: #be1919;margin-left: 20px"></i>
-															<p class="mb-0" style="margin-left: 15px">IP Location</p>
-															<p class="text-muted mb-0 ml-2" style="margin-left: 70px">Los Angeles,
-																CA
+															<p class="mb-0" style="margin-left: 15px">Exchange</p>
+															<p class="text-muted mb-0 ml-2" style="margin-left: 70px">NASDAQ
+
 															</p>
 														</div>
 														<hr>
@@ -607,7 +639,8 @@
 															<i class="fa-solid fa-right-left"
 																style="color: #e4aa0c; margin-left: 20px;"></i>
 															<p class="mb-0" style="margin-left: 10px">Number of Trades</p>
-															<p class="text-muted mb-0" style="margin-left: 65px">10</p>
+															<p class="text-muted mb-0" style="margin-left: 65px" id="numTrades"></p>
+
 														</div>
 														<hr>
 													</div>
@@ -618,10 +651,10 @@
 												</p>
 												<div id="container2" class="p-4" style="background-color: rgb(213, 216, 220 )">
 													<div class="row">
-														<div id="balance" class="d-flex align-items-center">
-															<p class="mb-0"
+														<div class="d-flex align-items-center">
+															<p class="mb-0" id="balance"
 																style="text-align: center; display: inline-block; width: 100%; color:black">
-																$10000
+
 															</p>
 							
 														</div>
@@ -655,26 +688,21 @@
 						<div class="wrapper rounded mt-5">
 
 
-							<div class="row mt-2 pt-2">
+							<!--  <div class="row mt-2 pt-2">
 								<div class="col-md-6" id="income">
 									<div class="d-flex justify-content-start align-items-center">
-										<p class="fa fa-long-arrow-down"></p>
+										<p class="fa fa-long-arrow-up"></p>
+
 										<p class="text mx-3">Income</p>
 										<p class="text-white ml-4 money">$9,758.23</p>
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="d-flex justify-content-md-end align-items-center">
-										<div class="fa fa-long-arrow-up"></div>
-										<div class="text mx-3">Expense</div>
-										<div class="text-white ml-4 money">$961.23</div>
-									</div>
-								</div>
-							</div>
+							</div> -->
 
 							<div class="d-flex justify-content-between align-items-center mt-3">
 								<ul class="nav nav-tabs w-75">
-									<li class="nav-item"> <a class="nav-link active" href="#history">History</a>
+									<li class="nav-item"> <a class="nav-link active" href="#history">History (Last Ten Transactions)</a>
+
 									</li>
 
 								</ul>
@@ -683,16 +711,17 @@
 
 							<div class="table-responsive mt-3">
 								<table class="table table-dark table-borderless">
-									<thead>
+									<!-- <thead>
 										<tr>
 											<th scope="col">Stock Name</th>
 											<th scope="col">Quantity</th>
 											<th scope="col">Transaction Time</th>
 											<th scope="col" class="text-right">Total Price</th>
 										</tr>
-									</thead>
-									<tbody>
-										<tr>
+									</thead> -->
+									<tbody id="printTable" style="white-space: pre; font-size: 16px; color: #D3D3D3;">
+										<!--<tr>
+
 											<td scope="row"> Apple </td>
 											<td>3</td>
 											<td class="text-muted">12 Jul 2020, 12:30 PM</td>
@@ -706,15 +735,17 @@
 											<td class="text-muted">11 Jul 2020, 2:00 PM</td>
 											<td class="d-flex justify-content-end align-items-center"> <span
 													class="fa fa-long-arrow-up mr-1"></span> $18.9 </td>
-										</tr>
+										</tr>  -->
+
 
 									</tbody>
 								</table>
 							</div>
 
-							<div class="d-flex justify-content-between align-items-center results"> <span
-									class="pl-md-3">Showing<b class="text-white"> 2 0f 2 </b> trasactions</span>
-							</div>
+							<!--  <div class="d-flex justify-content-between align-items-center results"> <span
+									class="pl-md-3">Showing<b class="text-white"> 2 of 2 </b> transactions</span>
+							</div> -->
+
 
 						</div>
 
@@ -744,24 +775,14 @@
 
 									<li><i class="icon fa-solid fa-user-group"></i><span class="text"> Group Number: 22
 										</span></li>
-									<li><span class="icon fa fa-paper-plane"></span><span class="text">jwang977@usc.edu
-											etc. </span></li>
+									
+
 								</ul>
 							</div>
 						</div>
 					</div>
 
-					<div class="row mt-5">
-						<div class="col-md-12 text-center">
 
-							<p class="copyright">
-								Copyright &copy;<script>
-									document.write(new Date().getFullYear());
-								</script> <i class="fa fa-heart" aria-hidden="true"></i> <a href="http://www.itsishu.cn"
-									target="_blank">CSCI201</a>
-							</p>
-						</div>
-					</div>
 				</div>
 			</footer>
 

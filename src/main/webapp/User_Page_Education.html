@@ -1,5 +1,36 @@
 <!DOCTYPE html>
 <html>
+
+	<script>
+	function getcookie(name = '') {
+	    let cookies = document.cookie;
+	    let cookiestore = {};
+	    
+	    cookies = cookies.split(";");
+	    
+	    if (cookies[0] == "" && cookies[0][0] == undefined) {
+	        return undefined;
+	    }
+	    
+	    cookies.forEach(function(cookie) {
+	        cookie = cookie.split(/=(.+)/);
+	        if (cookie[0].substr(0, 1) == ' ') {
+	            cookie[0] = cookie[0].substr(1);
+	        }
+	        cookiestore[cookie[0]] = cookie[1];
+	    });
+	    
+	    return (name !== '' ? cookiestore[name] : cookiestore);
+	}
+		function isLoggedIn(){
+			let c = getcookie("login");
+			if(c == "" || c==false || c=="false"){
+				window.location.replace("Index.html");
+			}
+		}
+	</script>
+	
+
 	<head>
 		<meta charset="utf-8">
 		<title>User_Home_Page</title>
@@ -9,7 +40,16 @@
 		<script src="https://kit.fontawesome.com/2ceae6c153.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
-	<body>
+	<body onload="isLoggedIn()">
+		<script>
+		function logout(){
+			document.cookie = "login=false";
+			document.cookie = "username=null";
+			window.location.replace("Index.html");
+			return false;
+		}
+		</script>
+
 		<header class="mui-bar mui-bar-nav">
 			
 
@@ -19,7 +59,8 @@
 				<div class="container">
 					<a class="navbar-brand" href="#">
 						<i class="fa-solid fa-arrow-trend-up"></i>
-						Trojan Stock</a>
+						Trojan Trader</a>
+
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false"
 						aria-label="Toggle navigation">
@@ -29,7 +70,8 @@
 					<div class="collapse navbar-collapse" id="navbarsExample05">
 						<!-- boostrap 5 left margin's short is ms,right margin's short is me -->
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-							<li class="nav-item">
+							<!-- <li class="nav-item">
+
 								<a class="nav-link" aria-current="page" href="Index.html">Home</a>
 							</li>
 							<li class="nav-item">
@@ -37,16 +79,19 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="Create_Account.html">Create Account</a>
-							</li>
-							<li class="nav-item active">
-								<a class="nav-link" href="User_Page_Education.html">Trojan Stock Education</a>
-							</li>
+							</li> -->
 							<li class="nav-item">
+								<a class="nav-link" href="User_Page_MyStock.html">My Stocks</a>
+							</li>
+							<li class="nav-item"> 
 								<a class="nav-link" href="User_Page_PurchaseStock.html">Buy/Sell Stock</a>
 							</li>
-							
+							<li class="nav-item active">
+								<a class="nav-link" href="User_Page_Education.html">Education</a>
+							</li>
 							<li class="nav-item" id = "logout">
-								<a class="nav-link" aria-current="page" href="" onclick="logout();" >Logout</a>
+								<a class="nav-link" aria-current="page" href="" onclick="logout()" >Logout</a>
+
 							</li>
 						</ul>
 
@@ -94,7 +139,8 @@
 						  <div class="col-md-8">
 							<div class="card-body">
 							  <h5 class="card-title">How Stock Taxes Work</h5>
-							  <p class="card-text">TThe NerdWallet article explains the tax implications of buying and selling stocks. Generally, profits are taxable, and capital gains on the sale of stocks are also usually taxed.</p>
+							  <p class="card-text">The NerdWallet article explains the tax implications of buying and selling stocks. Generally, profits are taxable, and capital gains on the sale of stocks are also usually taxed.</p>
+
 							</div>
 						  </div>
 						</div>
@@ -109,35 +155,27 @@
 			<!-- footer -->
 
 			<footer class="footer">
-				<div class="container">
+				<div class="container mt-5">
 					<div class="row">
-						
+
 						<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
 							<h2 class="footer-heading">Contact Us</h2>
-							<div class="block- mb-3">
+							<div class="block-23 mb-3">
 								<ul>
-									<li><span class="icon fa fa-map"></span><span class="text">Los Angeles, CA 90007</span></li>
+									<li><span class="icon fa fa-map"></span><span class="text">Los Angeles, CA
+											90007</span></li>
+
+									<li><i class="icon fa-solid fa-chalkboard-user"></i><span class="text">Mentor:
+											Devanshu Gupta</span></li>
+
+									<li><i class="icon fa-solid fa-user-group"></i><span class="text"> Group Number: 22
+										</span></li>
 									
-									<li><i class="icon fa-solid fa-chalkboard-user"></i><span class="text">Mentor: Devanshu Gupta</span></li>
-												
-									<li><i class="icon fa-solid fa-user-group"></i><span class="text"> Group Number: 22 </span></li>
-									<li><span class="icon fa fa-paper-plane"></span><span class="text">jwang977@usc.edu etc.  </span></li>
 								</ul>
 							</div>
 						</div>
-					</div>
+					</div>					
 
-					<div class="row mt-5">
-						<div class="col-md-12 text-center">
-
-							<p class="copyright">
-								Copyright &copy;<script>
-									document.write(new Date().getFullYear());
-								</script> <i class="fa fa-heart" aria-hidden="true"></i> <a
-									href="http://www.itsishu.cn" target="_blank">CSCI201</a>
-							</p>
-						</div>
-					</div>
 				</div>
 			</footer>
 

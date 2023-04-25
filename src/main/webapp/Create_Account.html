@@ -54,7 +54,12 @@
 			border-width: 1px 0;
 			box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
 			}
-			
+			.center {
+  				padding: 5px;
+  				display: flex;
+  				justify-content: center;
+  				text-align: center;
+			}
 			.b-example-vr {
 			flex-shrink: 0;
 			width: 1.5rem;
@@ -114,7 +119,7 @@
 			}
 	
 			#accountButton {
-				background-color: orange;
+				background-color: #5a23c8;
 				border: orange;
 				border-radius: 25px;
 			}
@@ -133,7 +138,8 @@
 		<main class="form-signin w-100 m-auto">
 		  <form name = "myform">
 		    <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-		    <h1 class="h3 mb-3 fw-normal">Create an Account to Enjoy Trading!</h1>
+		    <h1 class="h3 mb-3 fw-normal">Create an account to begin trading!</h1>
+
 
 			<div class="form-floating">
 				<input type="email" name="username" class="form-control" id="floatingInput"
@@ -153,8 +159,9 @@
 		    </div> -->
 		    <!-- <button class="w-100 btn btn-lg btn-primary" type="submit">Create Account</button> -->
 		    <input type="button" id="accountButton" class="w-100 btn btn-lg btn-primary" value="Create Account" onclick="createAccount();" />
-		    <strong><div id="loginMsg"></div></strong><br/>
-		    <p class="mt-5 mb-3 text-body-secondary">© Trojan Trade 2023</p>
+		    <strong><div class="center" id="loginMsg"></div></strong><br/>
+		    <p class="mt-5 mb-3 text-body-secondary">© Trojan Trader 2023</p>
+
 		  </form>
 		</main>
 		
