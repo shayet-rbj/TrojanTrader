@@ -10,21 +10,27 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script src="scripts.js"></script>
 	</head>
-	<body>
+	<body onload="isLoggedIn(); getStockPrice('AAPL', 'AAPLcontainer', 'current'); getStockPrice('MSFT', 'MSFTcontainer', 'current'); getStockPrice('TSLA', 'TSLAcontainer', 'current'); getStockPrice('AMZN', 'AMZNcontainer', 'current');">
 	<script>
-	function buyStock(stock){
-		var xhttp = new XMLHttpRequest();
-    	xhttp.open("POST", "BuyServlet", true);
-    	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    	xhttp.onload = function() {
-    		document.getElementById("buySellMsg").innerHTML = this.responseText;
-    	}
-    	let c = getcookie("username");
-    	
-        xhttp.send("field=stockInfo&stockName=" + stock + "&quantity=" + document.myform.quantity.value + "&price=" + 100 + "&username=" + c);
-		console.log(stock);
-	}
-	function sellStock(stock){
+		function isLoggedIn(){
+			let c = getcookie("login");
+			if(c == "" || c==false || c=="false"){
+				window.location.replace("Index.html");
+			}
+		}
+		function getStockPrice(stock, containername, type){
+			let c = getcookie("username");
+			var xhttp = new XMLHttpRequest();
+	    	xhttp.open("POST", "StockPriceServlet", true);
+	    	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    	xhttp.onload = function() {
+	    		document.getElementById(containername).innerHTML = this.responseText;
+	    	}
+	        xhttp.send("field=stockInfo&stockName=" + stock + "&type=" + type + "&username=" + c);
+		}
+		</script>
+	<script>
+	function sellStock(stock, containername){
 		var xhttp = new XMLHttpRequest();
     	xhttp.open("POST", "SellServlet", true);
     	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -32,11 +38,24 @@
     		document.getElementById("buySellMsg").innerHTML = this.responseText;
     	}
     	let c = getcookie("username");
+    	let d = document.getElementById(containername).value
     	
-        xhttp.send("field=stockInfo&stockName=" + stock + "&quantity=" + document.myform.quantity.value + "&price=" + 100 + "&username=" + c);
+        xhttp.send("field=stockInfo&stockName=" + stock +  "&quantity=" +  d + "&username=" + c);
 		console.log(stock);
 	}
-	
+	function buyStock(stock, containername){
+		var xhttp = new XMLHttpRequest();
+    	xhttp.open("POST", "BuyServlet", true);
+    	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    	xhttp.onload = function() {
+    		document.getElementById("buySellMsg").innerHTML = this.responseText;
+    	}
+    	let c = getcookie("username");
+    	let d = document.getElementById(containername).value
+    	
+        xhttp.send("field=stockInfo&stockName=" + stock + "&quantity=" + d + "&username=" + c);
+		console.log(stock);
+	}
 	function getcookie(name = '') {
 	    let cookies = document.cookie;
 	    let cookiestore = {};
@@ -54,14 +73,21 @@
 	        }
 	        cookiestore[cookie[0]] = cookie[1];
 	    });
-	    
+		
 	    return (name !== '' ? cookiestore[name] : cookiestore);
 	}
+	
+	function logout(){
+		document.cookie = "login=false";
+		document.cookie = "username=null";
+		window.location.replace("Index.html");
+		return false;
+	}
+	
 	</script>
 		
 	
 		<header class="mui-bar mui-bar-nav">
-						<strong><div id="buySellMsg" style="font-size: 2em"></div></strong><br />
 			
 
 			<!-- Menu -->
@@ -70,7 +96,7 @@
 				<div class="container">
 					<a class="navbar-brand" href="#">
 						<i class="fa-solid fa-arrow-trend-up"></i>
-						Trojan Stock</a>
+						Trojan Trader</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false"
 						aria-label="Toggle navigation">
@@ -80,14 +106,21 @@
 					<div class="collapse navbar-collapse" id="navbarsExample05">
 						<!-- boostrap 5 left margin's short is ms,right margin's short is me -->
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							<!--  <li class="nav-item" id="login">
+								<a class="nav-link" aria-current="page" href="Index.html">Home</a>
+							</li> -->
 							<li class="nav-item">
 								<a class="nav-link" aria-current="page" href="User_Page_MyStock.html">My Stocks</a>
 							</li>
 							<li class="nav-item active">
-								<a class="nav-link" href="User_Page_PurchaseStock.html">Purchase Stock</a>
+								<a class="nav-link" href="User_Page_PurchaseStock.html">Buy/Sell Stock</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="User_Page_Education_After_Login.html">Trojan Stock Education</a>
+								<a class="nav-link" href="User_Page_Education.html">Education</a>
+							</li>
+							
+							<li class="nav-item">
+								<a class="nav-link" aria-current="page" href="#" onclick="logout()">Logout</a>
 							</li>
 						</ul>
 
@@ -95,6 +128,15 @@
 				</div>
 			</nav>
 
+			<!-- Stock message section -->
+			<section class="my_stock">
+				<div class="tradeCon">
+					<strong><div id="buySellMsg" class="text-center" style="width: 89rem; height: 2.5rem; top: 2rem; bottom: 5rem; font-size: 2em; color: green;">
+						
+					</div></strong>
+				</div>
+			</section>
+			<!-- <strong><div id="buySellMsg" style="font-size: 2em"></div></strong><br /> -->
 
 			<!-- My Stock Section -->
 			<section class="my_stock">
@@ -106,16 +148,14 @@
 						  <p class="card-text">Apple is a technology company based in California that sells consumer electronics, software, and services. It's known for its innovative design, user-friendly interface, privacy, and security.</p>
 						</div>
 						<ul class="list-group list-group-flush">
-						  <li class="list-group-item">Current Price: $..</li>
-						  <li class="list-group-item">24-Hour High: $..</li>
-						  <li class="list-group-item">Opening Price: $..</li>
+						  <li class="list-group-item" id="AAPLcontainer">Current Price: $..</li>
 						</ul>
 						<div class="card-body" id="AAPL">
 						<form name="myform" method="GET">
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy" name="quantity">
-							  	<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('AAPL');">Buy</button>
-								<button class="btn btn-danger" type="button" id="button-addon1" onclick="sellStock('AAPL');">Sell</button>
+								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy" id="quantityAAPL">
+							  	<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('AAPL', 'quantityAAPL');">Buy</button>
+								<button class="btn btn-danger" type="button" id="button-addon1" onclick="sellStock('AAPL', 'quantityAAPL');">Sell</button>
 							  </div>
 							  </form>
 						</div>
@@ -129,14 +169,13 @@
 						  <p class="card-text">Tesla is an American company that designs, manufactures, and sells electric cars, energy storage systems, and solar products. It's known for its innovative technology and commitment to sustainable energy.</p>
 						</div>
 						<ul class="list-group list-group-flush">
-						  <li class="list-group-item">Current Price: $..</li>
-						  <li class="list-group-item">24-Hour High: $..</li>
-						  <li class="list-group-item">Opening Price: $..</li>
+						  <li class="list-group-item" id="TSLAcontainer">Current Price: $..</li>
 						</ul>
 						<div class="card-body">
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy">
-								<button class="btn btn-primary" type="button" id="button-addon1">Buy</button>
+								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy" id="quantityTSLA">
+								<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('TSLA', 'quantityTSLA');">Buy</button>
+								<button class="btn btn-danger" type="button" id="button-addon1" onclick="sellStock('TSLA', 'quantityTSLA');">Sell</button>
 							  </div>
 						</div>
 					  </div>
@@ -149,14 +188,13 @@
 						  <p class="card-text">Amazon is a Seattle-based technology company that primarily operates as an online retailer. It offers a wide range of products, services, and fast delivery. It prioritizes customer satisfaction.</p>
 						</div>
 						<ul class="list-group list-group-flush">
-						  <li class="list-group-item">Current Price: $..</li>
-						  <li class="list-group-item">24-Hour High: $..</li>
-						  <li class="list-group-item">Opening Price: $..</li>
+						  <li class="list-group-item" id="AMZNcontainer">Current Price: $..</li>
 						</ul>
 						<div class="card-body">
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy">
-								<button class="btn btn-primary" type="button" id="button-addon1">Buy</button>
+								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy" id="quantityAMZN">
+								<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('AMZN', 'quantityAMZN');">Buy</button>
+								<button class="btn btn-danger" type="button" id="button-addon1" onclick="sellStock('AMZN', 'quantityAMZN');">Sell</button>
 							  </div>
 						</div>
 					  </div>
@@ -169,14 +207,13 @@
 						  <p class="card-text">Microsoft is an American technology company that develops and sells computer software, electronics, and personal computers. It's known for its innovative technology and empowering mission.</p>
 						</div>
 						<ul class="list-group list-group-flush">
-						  <li class="list-group-item">Current Price: $..</li>
-						  <li class="list-group-item">24-Hour High: $..</li>
-						  <li class="list-group-item">Opening Price: $..</li>
+						  <li class="list-group-item" id="MSFTcontainer">Current Price: $..</li>
 						</ul>
 						<div class="card-body">
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy">
-								<button class="btn btn-primary" type="button" id="button-addon1" onclick="AAPLPrice();">Buy</button>
+								<input type="text" class="form-control" placeholder="Enter an Amount" aria-label="AmountBuy" id="quantityMSFT">
+								<button class="btn btn-success" type="button" id="button-addon1" onclick="buyStock('MSFT', 'quantityMSFT');">Buy</button>
+								<button class="btn btn-danger" type="button" id="button-addon1" onclick="sellStock('MSFT', 'quantityMSFT');">Sell</button>
 							  </div>
 						</div>
 					  </div>
@@ -188,9 +225,9 @@
 				
 			</section>
 			<!-- footer -->
-
+			
 			<footer class="footer">
-				<div class="container">
+				<div class="container">				
 					<div class="row">
 						
 						<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
@@ -202,23 +239,11 @@
 									<li><i class="icon fa-solid fa-chalkboard-user"></i><span class="text">Mentor: Devanshu Gupta</span></li>
 												
 									<li><i class="icon fa-solid fa-user-group"></i><span class="text"> Group Number: 22 </span></li>
-									<li><span class="icon fa fa-paper-plane"></span><span class="text">jwang977@usc.edu etc.  </span></li>
+						
 								</ul>
 							</div>
 						</div>
-					</div>
-
-					<div class="row mt-5">
-						<div class="col-md-12 text-center">
-
-							<p class="copyright">
-								Copyright &copy;<script>
-									document.write(new Date().getFullYear());
-								</script> <i class="fa fa-heart" aria-hidden="true"></i> <a
-									href="http://www.itsishu.cn" target="_blank">CSCI201</a>
-							</p>
-						</div>
-					</div>
+					</div>				
 				</div>				
 			</footer>
 

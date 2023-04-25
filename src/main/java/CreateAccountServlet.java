@@ -80,7 +80,7 @@ public class CreateAccountServlet extends HttpServlet {
 					+ " values(?, ?, ?)");
 			prep.setString(1, username);
 			prep.setString(2, password);
-			prep.setDouble(3, 1000.0);
+			prep.setDouble(3, 10000.0);
 			int i = prep.executeUpdate();
 	        if (i > 0) {
 	            System.out.println("ROW INSERTED");

@@ -19,15 +19,8 @@
 		            	document.cookie = "username=" + document.myform.username.value;
 		            	if(this.responseText.trim().normalize() === "Login Successful"){
 		            		//if user selects remember me
-		            		if(document.getElementById("checkBox").checked == true){
-		            			document.cookie = "login=true; expires = 2100;";
-		            			window.location.replace("Index.html");
-		            		}
-		            		//if user does not select remember me 
-		            		else{
-			            		document.cookie = "login=true; expires=0;";
-			            		window.location.replace("Index.html");	
-		            		}
+		            		document.cookie = "login=true; expires = 2100;";
+		            		window.location.replace("Index.html");
 		            	}
 		            	else{
 		            		document.cookie = "login=false";
@@ -38,6 +31,10 @@
 			}
 		</script>
 		<style type="text/css">
+			h1 {
+				text-align: center;
+				margin-bottom: 10px;
+			}
 			.center {
   				padding: 5px;
   				display: flex;
@@ -116,6 +113,22 @@
 			.bd-mode-toggle {
 			z-index: 1500;
 			}
+			#signinbutton {
+				background-color: #5a23c8;
+				border: orange;
+				border-radius: 25px;
+				
+			}
+	
+			#passwordButton {
+				border-radius: 25px;
+				margin-bottom: 10px;
+			}
+	
+			#emailButton {
+				border-radius: 25px;
+				margin-bottom: 10px;
+			}
 		</style>
 		
 		<link href="css/sign-in.css" rel="stylesheet">
@@ -126,27 +139,28 @@
 		<main class="form-signin w-100 m-auto">
 		  <form name="myform" method="GET">
 		    <!-- <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-		    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-		
-		    <div class="form-floating">
-		      <input type="email" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
-		      <label for="floatingInput">Email address</label>
-		    </div>
-		    <div class="form-floating">
-		      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-		      <label for="floatingPassword">Password</label>
-		    </div>
-		
-		    <div class="checkbox mb-3" id = checkBox>
-		      <label>
-		        <input type="checkbox" value="remember-me"> Remember me
-		      </label>
-		    </div>
-		    <!--  <button class="w-100 btn btn-lg btn-primary" type="submit" >Sign in </button> -->
-		   <!--  --> <input type="button" class="w-100 btn btn-lg btn-primary" value="Sign in" onclick="validateUsernameAndPassword();" />
-			
-			<strong><div class="center" id="loginMsg" ></div></strong><br />
-		    <p class="mt-5 mb-3 text-body-secondary">© Trojan Trade 2023</p>
+		    <h1 class="h3 mb-3 fw-normal"> Log in</h1>
+
+			<div class="form-floating">
+				<input id="emailButton" type="email" name="username" class="form-control" id="floatingInput"
+					placeholder="name@example.com">
+				<label for="floatingInput">Email address</label>
+			</div>
+			<div class="form-floating">
+				<input id="passwordButton" type="password" name="password" class="form-control" id="floatingPassword"
+					placeholder="Password">
+				<label for="floatingPassword">Password</label>
+			</div>
+
+
+			<!--  <button class="w-100 btn btn-lg btn-primary" type="submit" >Sign in </button> -->
+			<!--  --> <input type="button" id="signinbutton" class="w-100 btn btn-lg btn-primary" value="Sign in"
+				onclick="validateUsernameAndPassword();" />
+
+			<strong>
+				<div class="center" id="loginMsg"></div>
+			</strong><br />
+			<p class="mt-5 mb-3 text-body-secondary">© Trojan Trader 2023</p>
 		  </form>
 		</main>
 	</body>

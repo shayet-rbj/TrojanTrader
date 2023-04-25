@@ -8,18 +8,27 @@
 				document.getElementById("login").hidden = false;
 				document.getElementById("createAccount").hidden = false;
 				document.getElementById("logout").hidden = true;
+				document.getElementById("buySellPage").hidden = true;
+				//document.getElementById("home").hidden = true;
+				document.getElementById("education").hidden = true;
+				document.getElementById("mystocks").hidden = true;
+
 			}
 			else{
 				//user is logged in 
 				document.getElementById("login").hidden = true;
 				document.getElementById("createAccount").hidden = true;
 				document.getElementById("logout").hidden = false;
+				document.getElementById("buySellPage").hidden = false;
+				//document.getElementById("home").hidden = true;
+				document.getElementById("education").hidden = false;
+				document.getElementById("mystocks").hidden = false;
+
 			}
 			
 		}
 		function logout(){
 			document.cookie = "login=false";
-			document.cookie = "username=null";
 			document.cookie = "username=null";
 			window.location.replace("Index.html");
 		}
@@ -65,7 +74,7 @@
 		<script src="https://kit.fontawesome.com/2ceae6c153.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
-	<body onload="isLoggedIn(); getStockPrice('stock1'); getStockPrice('stock2'); getStockPrice('stock3');">
+	<body onload="isLoggedIn()">
 		<header class="mui-bar mui-bar-nav">
 			
 
@@ -75,7 +84,7 @@
 				<div class="container">
 					<a class="navbar-brand" href="#">
 						<i class="fa-solid fa-arrow-trend-up"></i>
-						Trojan Stock</a>
+						Trojan Trader</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false"
 						aria-label="Toggle navigation">
@@ -85,24 +94,27 @@
 					<div class="collapse navbar-collapse" id="navbarsExample05">
 						<!-- boostrap 5 left margin's short is ms,right margin's short is me -->
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							
+							<!--   <li class="nav-item active" id="home">
+								<a class="nav-link" aria-current="page" href="Index.html">Home</a>
+							</li> -->
+							<li class="nav-item" id="mystocks">
+								<a class="nav-link" href="User_Page_MyStock.html">My Stocks</a>
+							</li>
+							<li class="nav-item" id="buySellPage">
+								<a class="nav-link" href="User_Page_PurchaseStock.html">Buy/Sell Stock</a>
+							</li>
+							<li class="nav-item" id="education">
+								<a class="nav-link" href="User_Page_Education.html">Education</a>
+							</li>
 							<li class="nav-item" id="login">
 								<a class="nav-link" aria-current="page" href="Login.html">Login</a>
 							</li>
-							
+							<li class="nav-item" id="createAccount">
+								<a class="nav-link" href="Create_Account.html">Create Account</a>
+							</li>
 							<li class="nav-item" id = "logout">
 								<a class="nav-link" aria-current="page" href="" onclick="logout();" >Logout</a>
-							</li>
-							
-							<li class="nav-item" id="createAccount">
-								<a class="nav-link" aria-current="page" href="Create_Account.html">Create Account</a>
-							</li>
-		
-							<li class="nav-item">
-								<a class="nav-link" href="User_Page_Education.html">Trojan Stock Education</a>
-							</li>
-							
-							<li class="nav-item">
-								<a class="nav-link" href="User_Page_PurchaseStock.html">Buy/Sell Stock</a>
 							</li>
 						</ul>
 
@@ -112,18 +124,22 @@
 
 
 			<!-- My Stock Section -->
-			<section class="my_stock">
-				<div class="container">
-					<ul>
-						<li><span class="text" id = "stock1">Facebook Price: </span></li>
-						
-						<li><span class="text" id = "stock2">Amazon Price: </span></li>
-									
-						<li></span><span class="text" id = "stock3">Google Price:</span></li>
-					</ul>
+			<section class="my_stock" >
+				<div class="mx-auto" style="position: relative; top: 200px; bottom: 200px;">
+					<div class="row featurette" style="margin-left:300px">
+						<div class="col-md-4">
+						  <h2 class="featurette-heading">Welcome to Trojan Trader!<span class="text-muted"></span></h2>
+						  <p class="lead">On this website, you'll be able to buy and sell stocks in a simulated environment. We even have great education resources in order for first-time investors to learn! If you are ready to get started, please create an account following the buttons above.</p>
+						</div>
+						<div class="col-md-5">
+						  <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style="width: 600px; height: 280px;" src="https://content.fortune.com/wp-content/uploads/2019/10/GettyImages-1158402857.jpg" data-holder-rendered="true">
+						</div>
+					  </div>	
 				</div>
+				<!-- <P style="position: fixed; top: 200px;">Trojan stock</P> -->
 				
 			</section>
+
 			<!-- footer -->
 
 			<footer class="footer">
@@ -139,21 +155,8 @@
 									<li><i class="icon fa-solid fa-chalkboard-user"></i><span class="text">Mentor: Devanshu Gupta</span></li>
 												
 									<li><i class="icon fa-solid fa-user-group"></i><span class="text"> Group Number: 22 </span></li>
-									<li><span class="icon fa fa-paper-plane"></span><span class="text">jwang977@usc.edu etc.  </span></li>
 								</ul>
 							</div>
-						</div>
-					</div>
-
-					<div class="row mt-5">
-						<div class="col-md-12 text-center">
-
-							<p class="copyright">
-								Copyright &copy;<script>
-									document.write(new Date().getFullYear());
-								</script> <i class="fa fa-heart" aria-hidden="true"></i> <a
-									href="http://www.itsishu.cn" target="_blank">CSCI201</a>
-							</p>
 						</div>
 					</div>
 				</div>

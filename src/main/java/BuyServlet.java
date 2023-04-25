@@ -21,24 +21,26 @@ public class BuyServlet extends HttpServlet {
 		String fieldToValidate = request.getParameter("field");
 		String stock = "";
 		String quantity = "";
-		String price = "";
+		double price = 0.0;
 		String username = "";
 		Double usersBalance = 0.0;
 		
 		//get the current time
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm a MM/dd/yyyy");  
 		LocalDateTime now = LocalDateTime.now();
 		String currentTime = dtf.format(now);
 		PrintWriter out = response.getWriter();
 		if(fieldToValidate != null && fieldToValidate.equals("stockInfo")) {
 			stock = request.getParameter("stockName").strip();
 			quantity = request.getParameter("quantity").strip();
-			price = request.getParameter("price").strip();
 			username = request.getParameter("username").strip();
 		}
 		
 		System.out.println("Executing " + quantity + " purchase of " + stock + " for " + username);
-		
+		if(quantity.strip() == "" || quantity == " ") {
+			out.println("Please enter a valid quantity.");
+			return;
+		}
 		//check balance
 		try {
 			String url = "jdbc:mysql://localhost:3306/trojantrader"; 
@@ -54,6 +56,13 @@ public class BuyServlet extends HttpServlet {
 			ResultSet r = prep.executeQuery();
 			r.next();
 			usersBalance = r.getDouble(1);
+			
+			PreparedStatement prep2 = con.prepareStatement("SELECT price FROM stockprices WHERE stockname=?");
+			prep2.setString(1, stock);	
+			ResultSet r2 = prep2.executeQuery();
+			r2.next();
+			price = r2.getDouble(1);
+			//System.out.println("Price of " + stock + " is " + price);
 	        con.close();
 
 		}
@@ -65,7 +74,14 @@ public class BuyServlet extends HttpServlet {
 		
 		//if users has enough to purchase the stock, decrement balance, add purchase to their list, and output that the 
 		//purchase was successful
-		double totalPrice = Double.parseDouble(price) * Integer.parseInt(quantity);
+		double totalPrice = 0.0;
+		try {
+			totalPrice = price * Integer.parseInt(quantity);	
+		}
+		catch(Exception e) {
+			out.println("Please enter a valid quantity of stock (whole number).");
+			return;
+		}
 		if(usersBalance >= totalPrice) {
 			System.out.println(username + " has enough to purchase the stock. Now purchasing.");
 			try {
@@ -83,7 +99,7 @@ public class BuyServlet extends HttpServlet {
 				PreparedStatement prep2 = con.prepareStatement("insert into allTransactions(transactionID, username, stockname, purchaseprice, timeoftransaction, quantity) values(NULL, ?, ?, ?, ?, ?);");
 				prep2.setString(1, username);
 				prep2.setString(2, stock);
-				prep2.setDouble(3, Double.parseDouble(price));
+				prep2.setDouble(3, Integer.parseInt(quantity)*price);
 				prep2.setString(4, currentTime);
 				prep2.setInt(5, Integer.parseInt(quantity));
 
@@ -120,7 +136,7 @@ public class BuyServlet extends HttpServlet {
 					prep4.executeUpdate();
 				}
 				
-		        out.println("Successfully purchased " + quantity + " shares of " + stock + " for " + totalPrice);
+		        out.println("Successfully purchased " + quantity + " shares of " + stock + " for $" + totalPrice);
 		        con.close();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
