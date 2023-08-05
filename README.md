@@ -24,7 +24,11 @@ Due to the current economic downturn, the stock market is full of uncertainties 
 
 
 ## Additional Information 
-- Project Video Presentation --  [Video](https://github.com/shayet-rbj/TrojanTrader/blob/main/CSCI201_FPP_Team_22_presentation.mp4) , [Slides](https://github.com/shayet-rbj/TrojanTrader/blob/main/CSCI201_FPP_Team_22.pptx)
-- Project Video Demo --  [Video](https://github.com/shayet-rbj/TrojanTrader/blob/main/CSCI201_FPP_Team_22_Demo.mp4) 
-- Final Documentation[PDF](https://github.com/shayet-rbj/TrojanTrader/blob/main/CSCI201_FPP_Team_22_docs.pdf)
+- Video Presentation --  [Video](https://github.com/shayet-rbj/TrojanTrader/raw/main/CSCI201_FPP_Team_22_presentation.mp4) , [Slides](https://github.com/shayet-rbj/TrojanTrader/raw/main/CSCI201_FPP_Team_22.pptx)
+- Video Demo --  [Video](https://github.com/shayet-rbj/TrojanTrader/raw/main/CSCI201_FPP_Team_22_Demo.mp4) 
+- Final Documentation -- [PDF](https://github.com/shayet-rbj/TrojanTrader/raw/main/CSCI201_FPP_Team_22_docs.pdf)
+
+
+
+
 
