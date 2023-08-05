@@ -33,12 +33,12 @@ Due to the current economic downturn, the stock market is full of uncertainties 
 - homepage
 ![Homepage](https://github.com/shayet-rbj/TrojanTrader/raw/main/src/main/photos/homepage.jpg)
 - login page
-![Login](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/login.jpg)
+![Login](https://github.com/shayet-rbj/TrojanTrader/raw/main/src/main/photos/login.jpg)
 - create account page
-![Create Account](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/createaccount.jpg)
+![Create Account](https://github.com/shayet-rbj/TrojanTrader/raw/main/src/main/photos/createaccount.jpg)
 - education page
-![Education](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/education.jpg)
+![Education](https://github.com/shayet-rbj/TrojanTrader/raw/main/src/main/photos/education.jpg)
 - stock trading page
-![Stock Trading](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/stockpage.jpg)
+![Stock Trading](https://github.com/shayet-rbj/TrojanTrader/raw/main/src/main/photos/stockpage.jpg)
 - user profile
-![User Profile](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/userprofile.jpg)
+![User Profile](https://github.com/shayet-rbj/TrojanTrader/raw/main/src/main/photos/userprofile.jpg)
