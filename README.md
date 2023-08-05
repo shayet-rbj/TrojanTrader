@@ -22,7 +22,6 @@ Due to the current economic downturn, the stock market is full of uncertainties 
 
 
 
-
 ## Additional Information 
 - Video Presentation --  [Video](https://github.com/shayet-rbj/TrojanTrader/raw/main/CSCI201_FPP_Team_22_presentation.mp4) , [Slides](https://github.com/shayet-rbj/TrojanTrader/raw/main/CSCI201_FPP_Team_22.pptx)
 - Video Demo --  [Video](https://github.com/shayet-rbj/TrojanTrader/raw/main/CSCI201_FPP_Team_22_Demo.mp4) 
@@ -30,5 +29,17 @@ Due to the current economic downturn, the stock market is full of uncertainties 
 
 
 
-
-
+## Preview
+- homepage
+![Homepage](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/homepage.jpg)
+![Preview Homepage](https://github.com/mangeluc/Group-24-final-project/raw/main/JtProject/src/main/resources/static/images/Preview_selection.jpg)
+- login page
+![Login](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/login.jpg)
+- create account page
+![Create Account](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/createaccount.jpg)
+- education page
+![Education](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/education.jpg)
+- stock trading page
+![Stock Trading](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/stockpage.jpg)
+- user profile
+![User Profile](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/userprofile.jpg)
