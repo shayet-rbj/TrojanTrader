@@ -31,8 +31,7 @@ Due to the current economic downturn, the stock market is full of uncertainties 
 
 ## Preview
 - homepage
-![Homepage](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/homepage.jpg)
-![Preview Homepage](https://github.com/mangeluc/Group-24-final-project/raw/main/JtProject/src/main/resources/static/images/Preview_selection.jpg)
+![Homepage](https://github.com/shayet-rbj/TrojanTrader/raw/main/src/main/photos/homepage.jpg)
 - login page
 ![Login](https://github.com/shayet-rbj/TrojanTrader/tree/main/src/main/photos/login.jpg)
 - create account page
